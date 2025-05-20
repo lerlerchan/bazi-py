@@ -2,27 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bazi Calculator</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/lunar-javascript"></script>
-    <script defer src="script.js"></script>
 </head>
 <body>
-    <h1>Bazi Calculator</h1>
-    <form id="baziForm">
-        <label>Gender:
-            <select id="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
-        </label>
-        <label>Year: <input type="number" id="year" required></label>
-        <label>Month: <input type="number" id="month" min="1" max="12" required></label>
-        <label>Day: <input type="number" id="day" min="1" max="31" required></label>
-        <label>Time: <input type="number" id="hour" min="0" max="23" placeholder="HH"> : <input type="number" id="minute" min="0" max="59" placeholder="MM"></label>
-        <label><input type="checkbox" id="noTime"> Time unknown</label>
-        <button type="submit">Calculate</button>
-    </form>
-    <div id="result" class="result"></div>
+    <div class="container">
+        <header>
+            <h1>Bazi命理</h1>
+        </header>
+        <main>
+            <div class="input-section">
+                <label for="name">姓名:</label>
+                <input type="text" id="name" placeholder="请输入姓名">
+                <label for="gender">性别:</label>
+                <select id="gender">
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                </select>
+                <label for="date">出生日期:</label>
+                <input type="date" id="date">
+                <button id="calculate">计算</button>
+            </div>
+            <div class="result-section">
+                <h2>结果</h2>
+                <div id="result"></div>
+            </div>
+            <button id="save">保存为PDF</button>
+        </main>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

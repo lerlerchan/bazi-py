@@ -1,54 +1,42 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('baziForm');
-    const resultEl = document.getElementById('result');
+document.getElementById('calculate').addEventListener('click', function() {
+    const name = document.getElementById('name').value;
+    const gender = document.getElementById('gender').value;
+    const date = new Date(document.getElementById('date').value);
+    
+    if (!name || !date) {
+        alert('请填写所有字段');
+        return;
+    }
+    
+    // Simple Bazi logic (placeholder)
+    const result = `姓名: ${name}, 性别: ${gender}, 出生日期: ${date.toLocaleDateString()}`;
+    
+    document.getElementById('result').innerText = result;
+});
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+// Bazi calculation logic
+function calculateBazi(date) {
+    const heavenlyStems = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
+    const earthlyBranches = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
 
-        const gender = document.getElementById('gender').value;
-        const year = parseInt(document.getElementById('year').value, 10);
-        const month = parseInt(document.getElementById('month').value, 10);
-        const day = parseInt(document.getElementById('day').value, 10);
-        const noTime = document.getElementById('noTime').checked;
-        let hour = noTime ? 0 : parseInt(document.getElementById('hour').value, 10) || 0;
-        let minute = noTime ? 0 : parseInt(document.getElementById('minute').value, 10) || 0;
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // Months are 0-indexed
+    const day = date.getDate();
 
-        // Build solar and lunar objects
-        const solar = Lunar.Solar.fromYmdHms(year, month, day, hour, minute, 0);
-        const lunar = solar.getLunar();
-        const eightChar = lunar.getEightChar();
+    // Calculate the Heavenly Stem and Earthly Branch for year, month, day
+    const yearStem = heavenlyStems[(year - 4) % 10];
+    const yearBranch = earthlyBranches[(year - 4) % 12];
+    
+    const monthStem = heavenlyStems[(year * 12 + month) % 10];
+    const monthBranch = earthlyBranches[(month + 1) % 12];
 
-        // Prepare output
-            // Clear previous result
-            resultEl.innerHTML = '';
-            // Display header info
-            const infoDiv = document.createElement('div');
-            infoDiv.innerHTML = `<p>Gender: ${gender === 'female' ? 'Female' : 'Male'}</p>
-                <p>Gregorian: ${year}-${month.toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}` +
-                (noTime
-                    ? ' (time unknown)</p>'
-                    : ` ${hour.toString().padStart(2,'0')}:${minute.toString().padStart(2,'0')}</p>`);
-            resultEl.appendChild(infoDiv);
-            // Create table
-            const table = document.createElement('table');
-            const headerRow = table.insertRow();
-            ['Pillar', 'Gan', 'Zhi'].forEach(text => {
-                const th = document.createElement('th');
-                th.textContent = text;
-                headerRow.appendChild(th);
-            });
-            const pillars = [
-                { name: 'Year', gan: eightChar.getYearGan(), zhi: eightChar.getYearZhi() },
-                { name: 'Month', gan: eightChar.getMonthGan(), zhi: eightChar.getMonthZhi() },
-                { name: 'Day', gan: eightChar.getDayGan(), zhi: eightChar.getDayZhi() },
-                { name: 'Hour', gan: eightChar.getHourGan(), zhi: eightChar.getHourZhi() }
-            ];
-            pillars.forEach(({ name, gan, zhi }) => {
-                const row = table.insertRow();
-                row.insertCell().textContent = name;
-                row.insertCell().textContent = gan;
-                row.insertCell().textContent = zhi;
-            });
-            resultEl.appendChild(table);
-    });
+    const dayStem = heavenlyStems[(year * 365 + month * 30 + day) % 10];
+    const dayBranch = earthlyBranches[(day + 1) % 12];
+
+    return `${yearStem}${yearBranch} ${monthStem}${monthBranch} ${dayStem}${dayBranch}`;
+}
+
+// Placeholder for PDF saving functionality
+document.getElementById('save').addEventListener('click', function() {
+    alert('保存为PDF功能尚未实现');
 });
