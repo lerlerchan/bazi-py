@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.5;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    width: 150px;
+    padding: 8px;
+    align-self: center;
+    cursor: pointer;
+}
+
+pre#result {
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
