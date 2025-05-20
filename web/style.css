@@ -37,3 +37,20 @@ pre#result {
     white-space: pre-wrap;
     word-break: break-word;
 }
+/* Bazi result table styling */
+.result table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+.result th, .result td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+.result th {
+    background: #f0f0f0;
+}
+.result p {
+    margin: 5px 0;
+}

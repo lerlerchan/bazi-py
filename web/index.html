@@ -19,10 +19,10 @@
         <label>Year: <input type="number" id="year" required></label>
         <label>Month: <input type="number" id="month" min="1" max="12" required></label>
         <label>Day: <input type="number" id="day" min="1" max="31" required></label>
-        <label>Time: <input type="number" id="hour" min="0" max="23"></label>
+        <label>Time: <input type="number" id="hour" min="0" max="23" placeholder="HH"> : <input type="number" id="minute" min="0" max="59" placeholder="MM"></label>
         <label><input type="checkbox" id="noTime"> Time unknown</label>
         <button type="submit">Calculate</button>
     </form>
-    <pre id="result"></pre>
+    <div id="result" class="result"></div>
 </body>
 </html>
